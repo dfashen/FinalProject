@@ -2,8 +2,8 @@ package FinalProjCompany;
 
 
 public class Main {
-    public static void main(String[] args) {
-      Work wk = new Work();
-      wk.doWork();
+   public static void main(String[] args) {
+      Start st = new Start();
+      st.doStart();
     }
 }

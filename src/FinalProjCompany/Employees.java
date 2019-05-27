@@ -14,6 +14,12 @@ public class Employees {
         this.salary = salary;
     }
 
+    public Employees(int id, String name, int salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
     public int getId() {
         return id;
     }
@@ -48,11 +54,7 @@ public class Employees {
 
     @Override
     public String toString() {
-        return "Employees{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", positions=" + positions +
-                ", salary=" + salary +
-                '}';
+        return String.format("%-1d) %-10s %-5s %5d",
+                id, name, positions.getPositions(), salary );
     }
 }

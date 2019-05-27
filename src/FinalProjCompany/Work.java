@@ -5,93 +5,109 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class Work {
-    private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
+
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     private static final String URL = "jdbc:mysql://localhost:3306/Mycompany?serverTimezone=UTC";
 
-    public int pincode(){
-        Date date= new Date ();
-        SimpleDateFormat format = new SimpleDateFormat ("dMy");
+    public int pincode() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dMy");
         int i = Integer.parseInt(format.format(date));
-                     return i;
+        return i;
+    }
+
+    public void greateList() {
+        Connection connection;
+        List<Employees> employeesList = new ArrayList<>();
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            String query = "select * from employees e " +
+                    "left join positions p on (e.id_work = p.id);";
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("e.id");
+                String name = resultSet.getString("name");
+                int idwork = resultSet.getInt("id_work");
+                String spec = resultSet.getString("spec");
+                int salary = resultSet.getInt("salary");
+
+                Employees empl = new Employees(id, name, new Positions(idwork, spec), salary);
+                employeesList.add(empl);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        employeesList.forEach(System.out::println);
+    }
 
-            public void greateList(){
-                Connection connection;
-                List<Employees> employeesList = new ArrayList<>();
-                try {
-                    connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                    Statement statement = connection.createStatement();
-                    String query = "select * from employees e " +
-                            "left join positions p on (e.id_work = p.id);";
-                    ResultSet resultSet = statement.executeQuery(query);
-                    while (resultSet.next()) {
-                        int id = resultSet.getInt("e.id");
-                        String name = resultSet.getString("name");
-                        int idwork = resultSet.getInt("id_work");
-                        String spec = resultSet.getString("spec");
-                        int salary = resultSet.getInt("salary");
+    public void sortList(int r) {
+        Connection connection;
 
-                        Employees empl = new Employees(id, name, new Positions(idwork, spec), salary);
-                        employeesList.add(empl);
-            }}catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                employeesList.forEach(System.out::print);}
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            String que = "select e.id, name, salary, spec from employees e left join positions p on (e.id_work = p.id) where e.id = ? ;";
+            PreparedStatement preparedStatement = connection.prepareStatement(que);
+            preparedStatement.setInt(1, r);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-
-
-        public void doWork() {
-            Scanner sc = new Scanner(System.in);
+    public void premia(int x, int z) {
+        Connection connection;
+        if (x >= 0 && z > 0) {
             try {
-                Class.forName(DRIVER_NAME);
-            } catch (ClassNotFoundException e) {
-                System.err.println(DRIVER_NAME + " не удалось загрузить");
-                return;
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                PreparedStatement preparedStatement = connection.prepareStatement("update employees set salary = (salary + ?) where id = ?;");
+                preparedStatement.setInt(1, x);
+                preparedStatement.setInt(2, z);
+                preparedStatement.execute();
+                System.out.println("done");
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+        } else System.out.println("Вы сделали что то не так =(");
+    }
 
-            System.out.println("-=Добро пожаловать в программу для учёта сотрудников фирмы=-");
-            System.out.println("Введите пожалуйста пароль");   // пароль будет число/месяц(без 0)/год , например 2652019
-            int a = sc.nextInt();
-            int y = pincode();
-
-            if (a != y) {
-                System.out.println("Неверный пароль/Обратитесь к Офис-Менеджеру для уточнения пароля");
-            } else {
-                System.out.println("1. Полный список работающих людей;" +  '\n' +
-                        "2. Работа с финансовыми вопросами сотрудников;" +  '\n' +
-                        "3. Кадравая работа с сотрудниками компании"+  '\n' +
-                        "0. Выход/Назад");
-                int b = sc.nextInt();
-                while (b!=0){
-                    switch (b) {
-                        case 1:
-                            System.out.println("1. Полный список"+  '\n' + " 2. Сортировка списка ");
-                            int c = sc.nextInt();
-                            switch(c){
-                                case 1:
-                                    greateList();
-                                    break;
-                                case 2:
-
-                            }
-                    }
-                }
-
-
-
-
+    public void minus(int x, int z) {
+        Connection connection;
+        if (x >= 0 && z > 0) {
+            try {
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                PreparedStatement preparedStatement = connection.prepareStatement("update employees set salary = (salary - ?) where id = ?;");
+                preparedStatement.setInt(1, x);
+                preparedStatement.setInt(2, z);
+                preparedStatement.execute();
+                System.out.println("done");
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+        } else System.out.println("Вы сделали что то не так =(");
+    }
 
+    void delete(int x) {
+        Connection connection;
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("delete from employees e where e.id = ?;");
+            preparedStatement.setInt(1, x);
+            System.out.println("done");
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from employees where id = ?;");
+            preparedStatement.setInt(1, x);
+            System.out.println("done");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-
-
-
     }
+
+}
 
 
