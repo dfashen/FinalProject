@@ -119,7 +119,15 @@ void priem(){
     int id_work=sa.nextInt();
     System.out.println("Введите зарплату");
     int salary = sa.nextInt();
+    try {
+        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
+        Statement statement = connection.createStatement();
+
+        statement.execute("insert into employees values (null, '"+name+"',"+ id_work+","+ salary+");");
+    } catch (SQLException e){
+        e.printStackTrace();
+    }
 
 }
 }
