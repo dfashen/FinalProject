@@ -18,7 +18,7 @@ public class Start {
         }
 
         System.out.println("-=Добро пожаловать в программу для учёта сотрудников фирмы=-");
-        System.out.println("Введите пожалуйста пароль");   // пароль будет число/месяц(без 0)/год , например 2652019
+        System.out.println("Введите пожалуйста пароль");   // пароль будет число/месяц(без 0)/год , например 2652019, каждый день пароль меняется
         int a = sc.nextInt();
         int y = wk.pincode();
 
@@ -39,9 +39,8 @@ public class Start {
                     case 3:
                         personal();
                         break;
-                    case 0:
-                        System.out.println("До свидания!");
-                        break;
+
+
                     default:
                         System.out.println("Неправильный ввод");
                         break;
@@ -55,21 +54,33 @@ public class Start {
                 "2. Работа с финансовыми вопросами сотрудников;" + '\n' +
                 "3. Кадравая работа с сотрудниками компании" + '\n' +
                 "0. Выход");
+        int x = sc.nextInt();
+        if (x == 1) doList();
+        else if (x == 2) finance();
+        else if (x == 3) personal();
+        else if (x == 0) {
+            System.out.println("Вы уверенны? (0 для подтверждения)");
+            System.out.println("До свидания!");
+
+        }       else
+        System.out.println("Неправильный ввод");
     }
 
     public void doList() {
-        System.out.println("1. Полный список" + '\n' + "2. Сортировка списка " + '\n' + "0.Назад");
+        System.out.println("1. Полный список" + '\n' + "2. Вывод отдельного сотрудника " + '\n' + "0.Назад");
         int c = sc.nextInt();
         if (c == 1) {
             wk.greateList();
+
         } else if (c == 2) {
             System.out.println("Введите ID сотрудника");
             wk.sortList(sc.nextInt());
-        } else if (c == 0) {
+        } else if (c == 0)
             prostoList();
-        } else {
+        else {
             System.out.println("Неправильный ввод");
         }
+
     }
 
     public void finance() {

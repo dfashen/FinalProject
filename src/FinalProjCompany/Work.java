@@ -59,6 +59,7 @@ public class Work {
                 String specialty = resultSet.getString("spec");
                 int salary = resultSet.getInt("salary");
                 System.out.printf("%d) %-10s %-10s %5d ", id, name, specialty, salary);
+                System.out.println("");
 
         } }catch (SQLException e) {
             e.printStackTrace();
@@ -104,8 +105,8 @@ public class Work {
                        try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
                     Statement statement = connection.createStatement();
-                    statement.execute("delete from employees where name ='" +s+ "/';");
-                           System.out.println("Удвлено");
+                    statement.execute("delete from employees where name ='" +s+ "';");
+                           System.out.println("Уволен");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,6 +126,7 @@ void priem(){
         Statement statement = connection.createStatement();
 
         statement.execute("insert into employees values (null, '"+name+"',"+ id_work+","+ salary+");");
+        System.out.println("Поздравляем с зачислением " + name + " в штат сотрудников!");
     } catch (SQLException e){
         e.printStackTrace();
     }
