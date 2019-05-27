@@ -44,7 +44,7 @@ public class Work {
         }
         employeesList.forEach(System.out::println);
     }
-
+//тоже плохо работает
     public void sortList(int r) {
         Connection connection;
 
@@ -91,7 +91,7 @@ public class Work {
         } else System.out.println("Вы сделали что то не так =(");
     }
 
-    void delete(int x) {
+ /*   void delete(int x) {
         Connection connection;
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -104,7 +104,7 @@ public class Work {
             System.out.println("done");
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
