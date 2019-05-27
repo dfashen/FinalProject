@@ -25,4 +25,5 @@ public class Positions {
     public void setPositions(String positions) {
         this.spec = positions;
     }
+
 }
