@@ -34,21 +34,21 @@ public class Start {
                     case 1:
                         System.out.println("1. Полный список" + '\n' + "2. Сортировка списка " + '\n' + "0.Назад");
                         int c = sc.nextInt();
-                        switch (c) {
-                            case 1:
-                                wk.greateList();
-                                break;
-                            case 2:
-                                System.out.println("Введите ID сотрудника");
-                                wk.sortList(sc.nextInt());
-                            default:
-                                System.out.println("Неправильная команда");
-                                break;
+                        if (c == 1) {
+                            wk.greateList();
+                        } else if (c == 2) {
+                            System.out.println("Введите ID сотрудника");
+                            wk.sortList(sc.nextInt());
+                        } else if (c == 0) {
+                            continue;
+                        } else {
+                            System.out.println("Неправильная команда");
                         }
+                        break;
                     case 2:
-                        System.out.println("1. Увеличить зп сотрудника"  + '\n' + "2. Снизить зп сотрудника"  + '\n'+ "0.Назад");
+                        System.out.println("1. Увеличить зп сотрудника" + '\n' + "2. Снизить зп сотрудника" + '\n' + "0.Назад");
                         int d = sc.nextInt();
-                        switch (d){
+                        switch (d) {
                             case 1:
                                 System.out.println("Введите через пробел сумму и ID сотрудника");
                                 wk.premia(sc.nextInt(), sc.nextInt());
@@ -61,7 +61,7 @@ public class Start {
                                 System.out.println("Неправильная команда");
                                 break;
                         }
-                    case 3:
+                   /* case 3:
                         System.out.println("1. Уволить сотрудника"+ '\n' + "2. Принять нового сотрудника" + '\n' + "3. Перевести сотрудника на новую должность" + '\n' + "0. Назад" );
                         int e = sc.nextInt();
                         switch(e){
@@ -69,7 +69,7 @@ public class Start {
                                 System.out.println("ВВедите ID увольняемого сотрудника");
                                 wk.delete(sc.nextInt());
                                 break;
-                        }
+                        }*/
                 }
             }
 
