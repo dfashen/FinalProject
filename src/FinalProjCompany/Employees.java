@@ -56,5 +56,7 @@ public class Employees {
     public String toString() {
         return String.format("%-1d) %-10s %-5s %5d",
                 id, name, positions.getPositions(), salary );
+
     }
 }
+

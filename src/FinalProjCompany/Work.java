@@ -19,6 +19,7 @@ public class Work {
         SimpleDateFormat format = new SimpleDateFormat("dMy");
         int i = Integer.parseInt(format.format(date));
         return i;
+
     }
 
     public void greateList() {
