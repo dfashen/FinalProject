@@ -12,7 +12,8 @@ public class Start {
 
         try {
             Class.forName(DRIVER_NAME);
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             System.err.println(DRIVER_NAME + " не удалось загрузить");
             return;
         }
@@ -24,7 +25,8 @@ public class Start {
 
         if (a != y) {
             System.out.println("Неверный пароль/Обратитесь к Офис-Менеджеру для уточнения пароля");
-        } else {
+        } 
+        else {
             System.out.println("Добро пожаловать!");
             prostoList();
             int b = sc.nextInt();
@@ -39,14 +41,11 @@ public class Start {
                     case 3:
                         personal();
                         break;
-
-
                     default:
                         System.out.println("Неправильный ввод");
                         break;
                 }
             }
-
         }
     }
 
@@ -62,9 +61,8 @@ public class Start {
         else if (x == 0) {
             System.out.println("Вы уверенны? (0 для подтверждения)");
             System.out.println("До свидания!");
-
-        }       else
-        System.out.println("Неправильный ввод");
+        }       
+        else System.out.println("Неправильный ввод");
     }
 
     public void doList() {
@@ -78,9 +76,7 @@ public class Start {
             wk.sortList(sc.nextInt());
         } else if (c == 0)
             prostoList();
-        else {
-            System.out.println("Неправильный ввод");
-        }
+        else System.out.println("Неправильный ввод");
 
     }
 
@@ -122,6 +118,5 @@ public class Start {
                 System.out.println("Неправильный ввод");
                 break;
         }
-
     }
 }
